@@ -195,10 +195,12 @@
         populateLetterDiv();
         getDataFromServer();
 
-        $.ajax({
-            method: "GET",
-            url: "api.php",
-            success: data=>{ console.log(data) }
-        });
+        $.get('api.php', (data) => {console.log(data)});
+
+        // $.ajax({
+        //     method: "GET",
+        //     url: "api.php",
+        //     success: data=>{ console.log(data) }
+        // });
     </script>
 </body>
