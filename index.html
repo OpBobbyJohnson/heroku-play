@@ -1,39 +1,205 @@
 <!DOCTYPE html>
-<html>
-  <head>
+
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <style>
-      .hidden {
-        display: none;
-      }
+        body {
+            background-color: lightblue;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .container {
+            background-color: aliceblue;
+            border-radius: 5px;
+            padding: 1%;
+            margin-top: 1%;
+            margin-bottom: 1%;
+        }
+
+        .completedWords {
+            height: 50%;
+        }
+
+        .currentWord {
+            height: 20%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .letterSlot {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0% 1%;
+            text-align: center;
+            vertical-align: middle;
+            display: table-cell;
+            font: bold;
+        }
+
+        .letterDiv {
+            text-align: justify;
+            display: flex;
+            flex-direction: row;
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-  </head>
-  <body>
-    <h1>Spot The Bingo</h1>
-    <button id="grabmore">Fetch 10 Bingos</button>
-    <ul id="bingos">
-    </ul>
-  </body>
-  <script>
-    $(document).ready(function(){
-      
-      let showRacks = function(racks){
-        $("#bingos").html('');
-        racks.map(rack=>{
-          $("#bingos").append(`<li>${rack.rack}: <span class="answer hidden">${rack.words}</span></li>`);
-        });
-        $("#bingos li").on("click", function(evt){
-          $(evt.currentTarget).find(".answer").toggleClass("hidden");
-        });
-      }
-      
-      $("#grabmore").on("click", function(){
+</head>
+
+<body onkeydown='handleKeyPress(event)'>
+    <div class="container title">
+        <h1>
+            Just another word game!
+        </h1>
+    </div>
+    <div id='completedWordsContainer' class='container completedWords'>
+        Your Completed Words:
+        <div id='completedWords'>
+
+        </div>
+    </div>
+    <div id='letterDiv' class='container letterDiv'>
+    </div>
+    <div id='currentWordContainer' class='container currentWord'>
+    </div>
+
+    <script>
+        var word = 'genius';
+        const randomlyGenerateLetters = () => {
+            let characters = 'BCDFGHJKLMNPQRSTVWXYZ';
+            let vowels = 'AEIOU';
+            let charactersLength = characters.length;
+            let vlen = vowels.length;
+            let arr = [];
+            let result = '';
+            for (let i = 0; i < 6; i++) {
+                let x = Math.random() * charactersLength
+                arr.push(characters.charAt(Math.floor(x)));
+                characters = characters.replace(characters.charAt(x), '');
+                charactersLength--;
+            }
+            for (let i = 0; i < 2; i++) {
+                let x = Math.floor(Math.random * vowels.length)
+                arr.push(vowels.charAt(x));
+                vowels = vowels.replace(vowels.charAt(x), '')
+                vlen--;
+            }
+            arr.sort();
+            for (l of arr) {
+                result += l;
+            }
+            return result;
+        }
+        var letters = randomlyGenerateLetters();
+        var indexcount = 0;
+        const initializeCurrentWordContainer = () => {
+            let container = document.querySelector('#currentWordContainer');
+            let index = 0;
+            for (let letter of letters) {
+                let letterSlot = document.createElement('p');
+                letterSlot.className = 'letterSlot form-control';
+                letterSlot.id = `letterSlot${index}`;
+                container.append(letterSlot);
+                index++;
+            }
+        }
+        const populateLetterDiv = () => {
+            let container = document.querySelector('#letterDiv');
+            for (let letter of letters) {
+                let p = document.createElement('h3');
+                p.style.width = (container.clientWidth / letters.length) + 'px';
+                p.style.textAlign = 'center';
+                p.innerText = letter;
+                container.append(p);
+            }
+        }
+        const handleKeyPress = (event) => {
+            let keyVal = String.fromCharCode(event.keyCode).toUpperCase();
+            // check if the key is in the string of optional letters
+            if (letters.includes(keyVal)) {
+                let field = document.getElementById(`letterSlot${indexcount}`);
+                field.innerHTML = keyVal;
+                indexcount++;
+            }
+            // handle enter key
+            else if (event.keyCode === 13) {
+                let word = '';
+                for (let child of document.getElementsByClassName('letterSlot')) {
+                    word += child.innerText;
+                    child.innerText = '';
+                }
+                indexcount = 0;
+                console.log(`The word you entered is ${word}`);
+                let wDiv = document.getElementById('completedWords');
+                let p = document.createElement('p');
+                p.innerText = word;
+                p.id = `${word}_value`;
+                wDiv.append(p);
+            }
+            // handle backspace key
+            else if (event.keyCode === 8) {
+                if (indexcount > 0) {
+                    indexcount--;
+                    let field = document.getElementById(`letterSlot${indexcount}`);
+                    field.innerHTML = "";
+                }
+            }
+        }
+
+        const getEveryLetterCombination = (letters) => {
+            var result = [];
+
+            var loop = function (start, depth, prefix) {
+                for (var i = start; i < letters.length; i++) {
+                    var next = prefix + letters[i];
+                    if (depth > 0)
+                        loop(i + 1, depth - 1, next);
+                    else
+                        result.push(next);
+                }
+            }
+
+            for (var i = 0; i < letters.length; i++) {
+                loop(0, i, '');
+            }
+            console.log(result.length);
+            // fillter results
+            for (let i = 0; i < result.length;i++){
+                if(result[i].length === 1) {
+                    console.log(res);
+                    result.splice(i,1);
+                }
+            }
+            return result;
+        }
+
+        const getDataFromServer = () => {
+            let combinations = getEveryLetterCombination(letters);
+            console.log(JSON.stringify(combinations));
+        }
+
+        // run initialization functions 
+        initializeCurrentWordContainer();
+        populateLetterDiv();
+        getDataFromServer();
+
         $.ajax({
             method: "GET",
-            url: "api.php",
-            success: data=>{ showRacks(data)}
+            url: "ughPHP.php",
+            success: data=>{ console.log(data) }
         });
-      });
-    });
-  </script>
-</html>
+    </script>
+</body>
