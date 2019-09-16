@@ -51,7 +51,7 @@
     //this creates json and gives it back to the browser
     echo $entityBody;
     // header('Content-Type: application/text');
-
+    exit;
     // echo($gameLetters);
 
 ?>
