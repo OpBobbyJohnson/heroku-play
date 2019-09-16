@@ -1,7 +1,6 @@
 <?php
     ini_set('display_errors', 1);
     $entityBody = file_get_contents('php://input');
-    print_r($entityBody);
     //this is the basic way of getting a database handler from PDO, PHP's built in quasi-ORM
     $dbhandle = new PDO("sqlite:scrabble.sqlite") or die("Failed to open DB");
     if (!$dbhandle) die ($error);
@@ -18,13 +17,13 @@
     // generate random strings
     //generate constants
     for($x = 0; $x < 6; $x++){
-        $index = rand(0,20);
+        $index = rand(0,strlen($characters)-1);
         $letter = substr($characters,$index,1);
         $gameLetters = $gameLetters."".$letter;
     }
     for($x = 0; $x < 2; $x++){
-        $index = rand(0,4);
-        $letter = substr($characters,$index,1);
+        $index = rand(0,strlen($vowels)-1);
+        $letter = substr($vowels,$index,1);
         $gameLetters = $gameLetters."".$letter;
     }
 
@@ -48,11 +47,11 @@
     //making to this line means everything was great with this request
     header('HTTP/1.1 200 OK');
     //this lets the browser know to expect json
-    // header('Content-Type: application/json');
+    header('Content-Type: application/json');
     //this creates json and gives it back to the browser
-    // echo json_encode($results);
-    header('Content-Type: application/text');
+    echo json_encode($entityBody);
+    // header('Content-Type: application/text');
 
-    echo($gameLetters);
+    // echo($gameLetters);
 
 ?>
