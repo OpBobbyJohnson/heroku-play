@@ -1,5 +1,6 @@
 <?php
-
+    $entityBody = file_get_contents('php://input')
+    print_r($entityBody);
     //this is the basic way of getting a database handler from PDO, PHP's built in quasi-ORM
     $dbhandle = new PDO("sqlite:scrabble.sqlite") or die("Failed to open DB");
     if (!$dbhandle) die ($error);
