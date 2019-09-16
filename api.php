@@ -28,9 +28,9 @@
     }
 
 
-    for($x = 0; $x <= 2; $x++){
-        $query = "SELECT rack, words FROM racks WHERE length=7 and weight <= 10 order by random() limit 0, 10";
-        
+    foreach ($entityBody as &$value){
+        // $query = "SELECT rack, words FROM racks WHERE length=7 and weight <= 10 order by random() limit 0, 10";
+        $query = "SELECT rack, words FROM racks WHERE rack=\".$value.\"";
         //this next line could actually be used to provide user_given input to the query to 
         //avoid SQL injection attacks
         $statement = $dbhandle->prepare($query);
@@ -49,7 +49,7 @@
     //this lets the browser know to expect json
     header('Content-Type: application/json');
     //this creates json and gives it back to the browser
-    echo json_encode($entityBody);
+    echo json_encode($results);
     // header('Content-Type: application/text');
 
     // echo($gameLetters);
