@@ -170,11 +170,11 @@
                 }
             }
             let container = document.getElementById("completedWords");
-            for(let word in gamewords){
+            for(let word of gamewords){
                 let wordContainer = document.createElement('div');
                 wordContainer.id = word;
                 console.log(word);
-                for(letter in word){
+                for(letter of word){
                     console.log(letter);
                     let l = document.createElement('p');
                     l.className = "letterSlot form-control";
