@@ -10,7 +10,7 @@
     //the limit 0, 10 takes the first 10 results.
     // you might want to consider taking more results, implementing "pagination", 
     // ordering by rank, etc.
-    $results;
+    $results = [];
     for($x = 0; $x <= 2; $x++){
         $query = "SELECT rack, words FROM racks WHERE length=7 and weight <= 10 order by random() limit 0, 10";
         
@@ -23,7 +23,7 @@
         //there are several ways of getting the data out, iterating row by row,
         //I chose to get associative arrays inside of a big array
         //this will naturally create a pleasant array of JSON data when I echo in a couple lines
-        $results += $statement->fetchAll(PDO::FETCH_ASSOC);
+        $results = array_marge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
     }
     
     //this part is perhaps overkill but I wanted to set the HTTP headers and status code
