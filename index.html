@@ -51,6 +51,19 @@
             display: table-cell;
             font: bold;
         }
+        .letterBlock {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0% 1%;
+            text-align: center;
+            vertical-align: middle;
+            display: table-cell;
+            font: bold;
+        }
+        .wordContainer {
+            justify-content: baseline;
+            display:inline-flex;
+
+        }
 
         .letterDiv {
             text-align: justify;
@@ -173,11 +186,12 @@
             for(let word of gamewords){
                 let wordContainer = document.createElement('div');
                 wordContainer.id = word;
+                wordContainier.className = "wordContainer";
                 console.log(word);
                 for(letter of word){
                     console.log(letter);
                     let l = document.createElement('p');
-                    l.className = "letterSlot form-control";
+                    l.className = "letterBox form-control col-1";
                     l.innerHTML = letter;
                     wordContainer.appendChild(l);
                 }
