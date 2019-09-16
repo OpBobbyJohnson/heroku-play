@@ -20,7 +20,7 @@
     for($x = 0; $x < 6; $x++){
         $index = rand(0,20);
         $letter = substr($characters,$index,1);
-        $gameLetters += $letter;
+        $gameLetters = $gameLetters."".$letter;
     }
     for($x = 0; $x < 2; $x++){
         $index = rand(0,4);
