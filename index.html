@@ -196,12 +196,17 @@
         populateLetterDiv();
         getDataFromServer();
 
-        // $.get('api.php', (data) => {console.log(data)});
-
+        // $.ajax({
+        //     method: "GET",
+        //     url: "api.php",
+        //     success: data=>{ console.log(data) }
+        // });
         $.ajax({
-            method: "GET",
+            type: "POST",
             url: "api.php",
-            success: data=>{ console.log(data) }
+            data: getEveryLetterCombination(),
+            success: data=>{console.log(data)},
+            dataType: "application/json"
         });
     </script>
 </body>
