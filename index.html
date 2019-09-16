@@ -160,6 +160,28 @@
             }
         }
 
+        const populateGame = (data) => {
+            let gamewords = []
+            for(let res of data) {
+                let words = res.split("@@");
+                for (let word of words){
+                    gamewords.push(word);
+                }
+            }
+            let container = document.getElementById("completedWords");
+            for(let word in gamewords){
+                let wordContainer = document.createElement('div');
+                wordContainer.id = word;
+                for(letter in word){
+                    let l = document.craeteElement('p');
+                    l.className = "letterSlot form-control";
+                    l.innerHTML = letter;
+                    wordContainer.appendChild(l);
+                }
+                container.appendChild(wordContainer);
+            }
+        }
+
         const getEveryLetterCombination = (letters) => {
             var result = [];
 
@@ -194,7 +216,7 @@
                 url: "api.php",
                 dataType: 'json',
                 data: JSON.stringify(combinations),
-                success: data => { console.log(data) },
+                success: data => {populateGame(data)},
                 // dataType: "application/json",
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log(errorThrown);
