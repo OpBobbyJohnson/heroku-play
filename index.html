@@ -189,6 +189,13 @@
         const getDataFromServer = () => {
             let combinations = getEveryLetterCombination(letters);
             console.log(JSON.stringify(combinations));
+            $.ajax({
+            type: "POST",
+            url: "api.php",
+            data: combinations,
+            success: data=>{console.log(data)},
+            dataType: "application/json"
+        });
         }
 
         // run initialization functions 
@@ -201,12 +208,6 @@
         //     url: "api.php",
         //     success: data=>{ console.log(data) }
         // });
-        $.ajax({
-            type: "POST",
-            url: "api.php",
-            data: getEveryLetterCombination(),
-            success: data=>{console.log(data)},
-            dataType: "application/json"
-        });
+        
     </script>
 </body>
