@@ -164,8 +164,7 @@
             let gamewords = []
             console.log(data)
             for(let res of data) {
-                console.log(res);
-                let words = res.split("@@");
+                let words = res.words.split("@@");
                 for (let word of words){
                     gamewords.push(word);
                 }
