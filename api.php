@@ -10,7 +10,25 @@
     //the limit 0, 10 takes the first 10 results.
     // you might want to consider taking more results, implementing "pagination", 
     // ordering by rank, etc.
+    $characters = 'BCDFGHJKLMNPQRSTVWXYZ';
+    $vowels = 'AEIOU';
     $results = [];
+    $letterCombos = [];
+    $gameLetters = ''; 
+    // generate random strings
+    //generate constants
+    for($x = 0; $x < 6; $x++){
+        $index = rand(0,20);
+        $letter = substr($characters,$index,1);
+        $gameLetters += $letter;
+    }
+    for($x = 0; $x < 2; $x++){
+        $index = rand(0,4);
+        $letter = substr($characters,$index,1);
+        $gameLetters = $gameLetters."".$letter;
+    }
+
+
     for($x = 0; $x <= 2; $x++){
         $query = "SELECT rack, words FROM racks WHERE length=7 and weight <= 10 order by random() limit 0, 10";
         
@@ -32,6 +50,7 @@
     //this lets the browser know to expect json
     header('Content-Type: application/json');
     //this creates json and gives it back to the browser
-    echo json_encode($results);
+    // echo json_encode($results);
+    echo($gameLetters);
 
 ?>
