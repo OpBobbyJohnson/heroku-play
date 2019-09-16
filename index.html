@@ -193,7 +193,7 @@
                 type: "POST",
                 url: "api.php",
                 dataType: 'json',
-                data: combinations,
+                data: JSON.stringify(combinations),
                 success: data => { console.log(data) },
                 // dataType: "application/json",
                 error: function (jqXhr, textStatus, errorThrown) {
