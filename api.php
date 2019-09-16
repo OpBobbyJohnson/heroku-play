@@ -23,7 +23,7 @@
         //there are several ways of getting the data out, iterating row by row,
         //I chose to get associative arrays inside of a big array
         //this will naturally create a pleasant array of JSON data when I echo in a couple lines
-        $results = array_marge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
+        $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
     }
     
     //this part is perhaps overkill but I wanted to set the HTTP headers and status code
