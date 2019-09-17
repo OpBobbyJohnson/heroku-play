@@ -35,7 +35,7 @@
 
         .completedWords {
             height: 50%;
-            flex-direction: column;
+            flex-direction: row;
         }
 
         .currentWord {
@@ -71,6 +71,14 @@
             display: flex;
             flex-direction: row;
         }
+        .splitContainer {
+            width:50%;
+        }
+        .parentContainer {
+            display: flex;
+            flex-direction: row;
+
+        }
     </style>
 </head>
 
@@ -82,8 +90,13 @@
     </div>
     <div id='completedWordsContainer' class='container completedWords'>
         Your Completed Words:
-        <div id='completedWords'>
+        <div class="parentContainer" id='completedWords'>
+            <div id='s0' class="splitContainer">
+                
+            </div>
+            <div id='s1' class="splitContainer">
 
+            </div>
         </div>
     </div>
     <div id='letterDiv' class='container letterDiv'>
@@ -183,8 +196,10 @@
                     gamewords.push(word);
                 }
             }
-            let container = document.getElementById("completedWords");
+            
+            let count = 0;
             for(let word of gamewords){
+                let container = document.getElementById(`s${count%2}`);
                 let wordContainer = document.createElement('div');
                 wordContainer.id = word;
                 wordContainer.className = "wordContainer";
@@ -196,6 +211,7 @@
                     l.innerHTML = letter;
                     wordContainer.appendChild(l);
                 }
+                count++
                 container.appendChild(wordContainer);
             }
         }
