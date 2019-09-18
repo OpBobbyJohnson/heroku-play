@@ -73,7 +73,7 @@
             flex-direction: row;
         }
         .splitContainer {
-            width:50%;
+            width:25%;
             flex-direction: column;
             align-items: center;
             margin:auto;
@@ -99,6 +99,12 @@
                 
             </div>
             <div id='s1' class="splitContainer">
+
+            </div>
+            <div id='s2' class="splitContainer">
+
+            </div>
+            <div id='s3' class="splitContainer">
 
             </div>
         </div>
@@ -212,7 +218,7 @@
             
             let count = 0;
             for(let word of gamewords){
-                let container = document.getElementById(`s${count%2}`);
+                let container = document.getElementById(`s${count%4}`);
                 let wordContainer = document.createElement('div');
                 wordContainer.id = word;
                 wordContainer.className = "wordContainer";
@@ -221,7 +227,6 @@
                     console.log(letter);
                     let l = document.createElement('p');
                     l.className = "letterBox form-control col-1";
-                    l.innerHTML = letter;
                     wordContainer.appendChild(l);
                 }
                 count++
