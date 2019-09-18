@@ -186,6 +186,7 @@
                     let index = 0;
                     for(let child of wordContainer.childNodes) {
                         let word = child.id;
+                        console.log(child)
                         child.innerHTML = word[index];
                         index++;
                     }
@@ -229,6 +230,7 @@
                 }
                 count++
                 container.appendChild(wordContainer);
+                container.appendChild('br');
                 if(count >= 20) break;
             }
         }
