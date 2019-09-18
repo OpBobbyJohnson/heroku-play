@@ -184,7 +184,7 @@
                 let wordContainer = document.getElementById(word.toUpperCase());
                 if(wordContainer !== undefined) {
                     let index = 0;
-                    for(let child of wordContainer.children) {
+                    for(let child of wordContainer.childNodes) {
                         let word = child.id;
                         child.innerHTML = word[index];
                         index++;
@@ -222,9 +222,7 @@
                 let wordContainer = document.createElement('div');
                 wordContainer.id = word;
                 wordContainer.className = "wordContainer";
-                console.log(word);
                 for(letter of word){
-                    console.log(letter);
                     let l = document.createElement('p');
                     l.className = "letterBox form-control col-1";
                     wordContainer.appendChild(l);
