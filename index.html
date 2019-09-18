@@ -182,10 +182,11 @@
                 indexcount = 0;
                 console.log(`The word you entered is ${word}`);
                 let wordContainer = document.getElementById(word.toUpperCase());
-                if(wordContainer !== undefined) {
+                console.log(wordContainer);
+                if(wordContainer !== undefined || wordContainer !== null) {
                     let index = 0;
                     for(let child of wordContainer.childNodes) {
-                        let word = child.id;
+                        let word = wordContainer.id;
                         console.log(child)
                         child.innerHTML = word[index];
                         index++;
