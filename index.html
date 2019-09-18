@@ -177,9 +177,11 @@
                 console.log(`The word you entered is ${word}`);
                 let wordContainer = document.getElementById(word.toUpperCase());
                 if(wordContainer !== undefined) {
+                    let index = 0;
                     for(let child of wordContainer.children) {
-                        console.log(child);
-                        child.style.color = "#495057";
+                        let word = child.id;
+                        child.innerHTML = word[index];
+                        index++;
                     }
                 }
                 let wDiv = document.getElementById('completedWords');
@@ -224,7 +226,7 @@
                 }
                 count++
                 container.appendChild(wordContainer);
-                if(count >= 10) break;
+                if(count >= 20) break;
             }
         }
 
