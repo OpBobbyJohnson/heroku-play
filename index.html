@@ -59,6 +59,7 @@
             vertical-align: middle;
             display:table-row;
             font: bold;
+            color:'#ffffff';
         }
         .wordContainer {
             justify-content: baseline;
@@ -75,6 +76,7 @@
             width:50%;
             flex-direction: column;
             align-items: center;
+            margin:auto;
         }
         .parentContainer {
             display: flex;
@@ -173,6 +175,13 @@
                 }
                 indexcount = 0;
                 console.log(`The word you entered is ${word}`);
+                let wordContainer = document.getElementById(word.toUpperCase());
+                if(wordContainer !== undefined) {
+                    for(let child of wordContainer.children) {
+                        console.log(child);
+                        child.style.color = "#495057";
+                    }
+                }
                 let wDiv = document.getElementById('completedWords');
                 let p = document.createElement('p');
                 p.innerText = word;
@@ -215,6 +224,7 @@
                 }
                 count++
                 container.appendChild(wordContainer);
+                if(count >= 10) break;
             }
         }
 
