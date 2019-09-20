@@ -116,6 +116,7 @@
 
     <script>
         var score = 0;
+        var scoreValues = {};
         var word = 'genius';
         const randomlyGenerateLetters = () => {
             let characters = 'BCDFGHJKLMNPQRSTVWXYZ';
@@ -212,9 +213,10 @@
                 let words = res.words.split("@@");
                 for (let word of words){
                     gamewords.push(word);
+                    scoreValues = {word: res.weight};
                 }
             }
-            
+            console.log(JSON.stringify(scoreValues));
             let count = 0;
             for(let word of gamewords){
                 let container = document.getElementById(`s${count%4}`);
