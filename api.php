@@ -29,7 +29,11 @@
 
     // lets get that bingo
     $query = "SELECT rack, words FROM racks WHERE length=8 order by random() limit 1";
-    $myrack = "AAABNN";
+    $statement = $dbhandle->prepare($query);
+    $statement->execute();
+    $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
+
+    $myrack = $results[0];
     $racks = [];
     for($i = 0; $i < pow(2, strlen($myrack)); $i++){
         $ans = "";
@@ -45,8 +49,7 @@
     }
     $racks = array_unique($racks);
     // print_r($racks);
-    $statement = $dbhandle->prepare($query);
-    $statement->execute();
+    
 
 
     // foreach ($entityBody as &$value){
