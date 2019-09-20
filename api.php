@@ -30,7 +30,7 @@
 
     foreach ($entityBody as &$value){
         // $query = "SELECT rack, words FROM racks WHERE length=7 and weight <= 10 order by random() limit 0, 10";
-        $query = "SELECT rack, words FROM racks WHERE rack=\"$value\"";
+        $query = "SELECT rack, weight, words FROM racks WHERE rack=\"$value\"";
         //this next line could actually be used to provide user_given input to the query to 
         //avoid SQL injection attacks
         $statement = $dbhandle->prepare($query);
