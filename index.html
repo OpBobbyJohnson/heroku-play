@@ -87,6 +87,7 @@
             top:0;
             right:0;
             position:absolute;
+            font-size: 100%;
         }
     </style>
 </head>
@@ -278,7 +279,12 @@
                 url: "api.php",
                 dataType: 'json',
                 data: JSON.stringify(combinations),
-                success: data => {populateGame(data)},
+                success: data => {
+                    while(data[0].words.split("@@")[0].length < 8){
+                        getDataFromServer();
+                    }
+                    populateGame(data);
+                },
                 // dataType: "application/json",
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log(errorThrown);
