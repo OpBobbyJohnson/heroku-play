@@ -83,14 +83,22 @@
             flex-direction: row;
 
         }
+        #scoreCounter {
+            top:0;
+            right:0;
+            position:absolute;
+        }
     </style>
 </head>
 
 <body onkeydown='handleKeyPress(event)'>
+    <div id='scoreCounter'>
+    </div>
     <div class="container title">
         <h1>
             Just another word game!
         </h1>
+        
     </div>
     <div id='completedWordsContainer' class='container completedWords'>
         Your Completed Words:
@@ -187,15 +195,13 @@
                 console.log(wordContainer);
                 if(wordContainer !== undefined || wordContainer !== null) {
                     let index = 0;
-                    console.log(wordContainer);
-                    console.log(wordContainer.id);
-                    score += scoreValues[wordContainer.id];
+                    score += parseint(scoreValues[wordContainer.id]);
                     for(let child of wordContainer.childNodes) {
                         let word = wordContainer.id;
-                        console.log(child)
                         child.innerHTML = word[index];
                         index++;
                     }
+                    document.getElementById("scoreCounter").innerHTML = score;
                     console.log(score);
                 }
                 
