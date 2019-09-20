@@ -127,32 +127,6 @@
         var score = 0;
         var scoreValues = {};
         var word = 'genius';
-        const randomlyGenerateLetters = () => {
-            let characters = 'BCDFGHJKLMNPQRSTVWXYZ';
-            let vowels = 'AEIOU';
-            let charactersLength = characters.length;
-            let vlen = vowels.length;
-            let arr = [];
-            let result = '';
-            for (let i = 0; i < 6; i++) {
-                let x = Math.random() * charactersLength
-                arr.push(characters.charAt(Math.floor(x)));
-                characters = characters.replace(characters.charAt(x), '');
-                charactersLength--;
-            }
-            for (let i = 0; i < 2; i++) {
-                let x = Math.floor(Math.random * vowels.length)
-                arr.push(vowels.charAt(x));
-                vowels = vowels.replace(vowels.charAt(x), '')
-                vlen--;
-            }
-            arr.sort();
-            for (l of arr) {
-                result += l;
-            }
-            return result;
-        }
-        var letters = randomlyGenerateLetters();
         var indexcount = 0;
         const initializeCurrentWordContainer = () => {
             let container = document.querySelector('#currentWordContainer');
@@ -165,7 +139,7 @@
                 index++;
             }
         }
-        const populateLetterDiv = () => {
+        const populateLetterDiv = (letters) => {
             let container = document.querySelector('#letterDiv');
             for (let letter of letters) {
                 let p = document.createElement('h3');
@@ -218,8 +192,8 @@
         }
 
         const populateGame = (data) => {
-            let gamewords = []
-            console.log(data)
+            let gamewords = [];
+            console.log(data);
             for(let res of data) {
                 let words = res.words.split("@@");
                 for (let word of words){
@@ -280,10 +254,8 @@
                 // dataType: 'json',
                 // data: JSON.stringify(combinations),
                 success: data => {
-                    // while(data[0].words.split("@@")[0].length < 8){
-                    //     getDataFromServer();
-                    // }
-                    console.log(data);
+                    letters = data[0].rack;
+                    populateLetterDiv(letters);
                     populateGame(data);
                 },
                 // dataType: "application/json",
@@ -295,7 +267,6 @@
 
         // run initialization functions 
         initializeCurrentWordContainer();
-        populateLetterDiv();
         getDataFromServer();
 
         // $.ajax({
