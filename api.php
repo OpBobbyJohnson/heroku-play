@@ -29,7 +29,26 @@
 
 
     foreach ($entityBody as &$value){
-        // $query = "SELECT rack, words FROM racks WHERE length=7 and weight <= 10 order by random() limit 0, 10";
+        // lets get that bingo
+        $query = "SELECT rack, words FROM racks WHERE length=8 order by random() limit 1";
+        $myrack = "AAABNN";
+        $racks = [];
+        for($i = 0; $i < pow(2, strlen($myrack)); $i++){
+            $ans = "";
+            for($j = 0; $j < strlen($myrack); $j++){
+                //if the jth digit of i is 1 then include letter
+                if (($i >> $j) % 2) {
+                $ans .= $myrack[$j];
+                }
+            }
+            if (strlen($ans) > 1){
+                $racks[] = $ans;	
+            }
+        }
+        $racks = array_unique($racks);
+        // print_r($racks);
+        $statement = $dbhandle->prepare($query);
+        $statement->execute();
         $query = "SELECT rack, weight, words FROM racks WHERE rack=\"$value\"";
         //this next line could actually be used to provide user_given input to the query to 
         //avoid SQL injection attacks
@@ -49,7 +68,8 @@
     //this lets the browser know to expect json
     header('Content-Type: application/json');
     //this creates json and gives it back to the browser
-    echo json_encode($results);
+    // echo json_encode($results);
+    echo json_encode($racks);
     // header('Content-Type: application/text');
 
     // echo($gameLetters);

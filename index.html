@@ -280,9 +280,9 @@
                 dataType: 'json',
                 data: JSON.stringify(combinations),
                 success: data => {
-                    while(data[0].words.split("@@")[0].length < 8){
-                        getDataFromServer();
-                    }
+                    // while(data[0].words.split("@@")[0].length < 8){
+                    //     getDataFromServer();
+                    // }
                     populateGame(data);
                 },
                 // dataType: "application/json",
