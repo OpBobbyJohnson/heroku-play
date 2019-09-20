@@ -219,34 +219,33 @@
             }
         }
 
-        const getEveryLetterCombination = (letters) => {
-            var result = [];
+        // const getEveryLetterCombination = (letters) => {
+        //     var result = [];
 
-            var loop = function (start, depth, prefix) {
-                for (var i = start; i < letters.length; i++) {
-                    var next = prefix + letters[i];
-                    if (depth > 0)
-                        loop(i + 1, depth - 1, next);
-                    else
-                        result.push(next);
-                }
-            }
+        //     var loop = function (start, depth, prefix) {
+        //         for (var i = start; i < letters.length; i++) {
+        //             var next = prefix + letters[i];
+        //             if (depth > 0)
+        //                 loop(i + 1, depth - 1, next);
+        //             else
+        //                 result.push(next);
+        //         }
+        //     }
 
-            for (var i = 0; i < letters.length; i++) {
-                loop(0, i, '');
-            }
-            console.log(result.length);
-            // fillter results
-            for (let i = 0; i < result.length; i++) {
-                if (result[i].length === 1) {
-                    result.splice(i, 1);
-                }
-            }
-            return result;
-        }
+        //     for (var i = 0; i < letters.length; i++) {
+        //         loop(0, i, '');
+        //     }
+        //     console.log(result.length);
+        //     // fillter results
+        //     for (let i = 0; i < result.length; i++) {
+        //         if (result[i].length === 1) {
+        //             result.splice(i, 1);
+        //         }
+        //     }
+        //     return result;
+        // }
 
         const getDataFromServer = () => {
-            let combinations = getEveryLetterCombination(letters);
             console.log(JSON.stringify(combinations));
             $.ajax({
                 type: "GET",
