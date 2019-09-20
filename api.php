@@ -73,11 +73,10 @@
     header('HTTP/1.1 200 OK');
     //this lets the browser know to expect json
     // header('Content-Type: application/json');
-    header('Content-Type: text/html');
     //this creates json and gives it back to the browser
     // echo json_encode($results);
     echo $racks;
-    // header('Content-Type: application/text');
+    header('Content-Type: application/text');
 
     // echo($gameLetters);
 
