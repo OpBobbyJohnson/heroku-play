@@ -31,9 +31,10 @@
     $query = "SELECT rack, words FROM racks WHERE length=8 order by random() limit 1";
     $statement = $dbhandle->prepare($query);
     $statement->execute();
-    $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
-
-    $myrack = $results[0];
+    $result = $statement -> fetchAll();
+    foreach( $result as $row ) {
+        $myrack = $row["rack"];
+    }
     $racks = [];
     for($i = 0; $i < pow(2, strlen($myrack)); $i++){
         $ans = "";
@@ -74,7 +75,7 @@
     header('Content-Type: application/json');
     //this creates json and gives it back to the browser
     // echo json_encode($results);
-    echo json_encode($racks);
+    echo $racks;
     // header('Content-Type: application/text');
 
     // echo($gameLetters);
