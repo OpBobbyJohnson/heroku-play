@@ -72,11 +72,11 @@
     //making to this line means everything was great with this request
     header('HTTP/1.1 200 OK');
     //this lets the browser know to expect json
-    // header('Content-Type: application/json');
+    header('Content-Type: application/json');
     //this creates json and gives it back to the browser
     // echo json_encode($results);
-    echo $racks;
-    header('Content-Type: application/text');
+    echo json_encode($racks);
+    // header('Content-Type: application/text');
 
     // echo($gameLetters);
 
