@@ -124,6 +124,7 @@
     </div>
 
     <script>
+        var letters = "";
         var score = 0;
         var scoreValues = {};
         var word = 'genius';
@@ -252,7 +253,7 @@
                 // dataType: 'json',
                 // data: JSON.stringify(combinations),
                 success: data => {
-                    let letters = data[0].rack;
+                    letters = data[0].rack;
                     initializeCurrentWordContainer(letters);
                     populateLetterDiv(letters);
                     populateGame(data);
