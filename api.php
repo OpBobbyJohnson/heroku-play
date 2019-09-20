@@ -53,20 +53,20 @@
     
 
 
-    // foreach ($entityBody as &$value){
+    foreach ($racks as &$value){
         
-    //     $query = "SELECT rack, weight, words FROM racks WHERE rack=\"$value\"";
-    //     //this next line could actually be used to provide user_given input to the query to 
-    //     //avoid SQL injection attacks
-    //     $statement = $dbhandle->prepare($query);
-    //     $statement->execute();
+        $query = "SELECT rack, weight, words FROM racks WHERE rack=\"$value\"";
+        //this next line could actually be used to provide user_given input to the query to 
+        //avoid SQL injection attacks
+        $statement = $dbhandle->prepare($query);
+        $statement->execute();
         
-    //     //The results of the query are typically many rows of data
-    //     //there are several ways of getting the data out, iterating row by row,
-    //     //I chose to get associative arrays inside of a big array
-    //     //this will naturally create a pleasant array of JSON data when I echo in a couple lines
-    //     $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
-    // }
+        //The results of the query are typically many rows of data
+        //there are several ways of getting the data out, iterating row by row,
+        //I chose to get associative arrays inside of a big array
+        //this will naturally create a pleasant array of JSON data when I echo in a couple lines
+        $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
+    }
     
     //this part is perhaps overkill but I wanted to set the HTTP headers and status code
     //making to this line means everything was great with this request
@@ -75,7 +75,7 @@
     header('Content-Type: application/json');
     //this creates json and gives it back to the browser
     // echo json_encode($results);
-    echo json_encode($racks);
+    echo json_encode($results);
     // header('Content-Type: application/text');
 
     // echo($gameLetters);
