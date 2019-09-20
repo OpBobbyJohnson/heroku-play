@@ -215,7 +215,7 @@
                 let words = res.words.split("@@");
                 for (let word of words){
                     gamewords.push(word);
-                    scoreValues = {word: res.weight};
+                    scoreValues[word] = res.weight;
                 }
             }
             console.log(JSON.stringify(scoreValues));
