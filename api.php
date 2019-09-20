@@ -27,40 +27,42 @@
         $gameLetters = $gameLetters."".$letter;
     }
 
-
-    foreach ($entityBody as &$value){
-        // lets get that bingo
-        $query = "SELECT rack, words FROM racks WHERE length=8 order by random() limit 1";
-        $myrack = "AAABNN";
-        $racks = [];
-        for($i = 0; $i < pow(2, strlen($myrack)); $i++){
-            $ans = "";
-            for($j = 0; $j < strlen($myrack); $j++){
-                //if the jth digit of i is 1 then include letter
-                if (($i >> $j) % 2) {
-                $ans .= $myrack[$j];
-                }
-            }
-            if (strlen($ans) > 1){
-                $racks[] = $ans;	
+    // lets get that bingo
+    $query = "SELECT rack, words FROM racks WHERE length=8 order by random() limit 1";
+    $myrack = "AAABNN";
+    $racks = [];
+    for($i = 0; $i < pow(2, strlen($myrack)); $i++){
+        $ans = "";
+        for($j = 0; $j < strlen($myrack); $j++){
+            //if the jth digit of i is 1 then include letter
+            if (($i >> $j) % 2) {
+            $ans .= $myrack[$j];
             }
         }
-        $racks = array_unique($racks);
-        // print_r($racks);
-        $statement = $dbhandle->prepare($query);
-        $statement->execute();
-        $query = "SELECT rack, weight, words FROM racks WHERE rack=\"$value\"";
-        //this next line could actually be used to provide user_given input to the query to 
-        //avoid SQL injection attacks
-        $statement = $dbhandle->prepare($query);
-        $statement->execute();
-        
-        //The results of the query are typically many rows of data
-        //there are several ways of getting the data out, iterating row by row,
-        //I chose to get associative arrays inside of a big array
-        //this will naturally create a pleasant array of JSON data when I echo in a couple lines
-        $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
+        if (strlen($ans) > 1){
+            $racks[] = $ans;	
+        }
     }
+    $racks = array_unique($racks);
+    // print_r($racks);
+    $statement = $dbhandle->prepare($query);
+    $statement->execute();
+
+
+    // foreach ($entityBody as &$value){
+        
+    //     $query = "SELECT rack, weight, words FROM racks WHERE rack=\"$value\"";
+    //     //this next line could actually be used to provide user_given input to the query to 
+    //     //avoid SQL injection attacks
+    //     $statement = $dbhandle->prepare($query);
+    //     $statement->execute();
+        
+    //     //The results of the query are typically many rows of data
+    //     //there are several ways of getting the data out, iterating row by row,
+    //     //I chose to get associative arrays inside of a big array
+    //     //this will naturally create a pleasant array of JSON data when I echo in a couple lines
+    //     $results = array_merge($statement->fetchAll(PDO::FETCH_ASSOC),$results);
+    // }
     
     //this part is perhaps overkill but I wanted to set the HTTP headers and status code
     //making to this line means everything was great with this request
