@@ -128,7 +128,7 @@
         var scoreValues = {};
         var word = 'genius';
         var indexcount = 0;
-        const initializeCurrentWordContainer = () => {
+        const initializeCurrentWordContainer = (letters) => {
             let container = document.querySelector('#currentWordContainer');
             let index = 0;
             for (let letter of letters) {
@@ -255,6 +255,7 @@
                 // data: JSON.stringify(combinations),
                 success: data => {
                     letters = data[0].rack;
+                    initializeCurrentWordContainer(letters);
                     populateLetterDiv(letters);
                     populateGame(data);
                 },
@@ -266,7 +267,6 @@
         }
 
         // run initialization functions 
-        initializeCurrentWordContainer();
         getDataFromServer();
 
         // $.ajax({
