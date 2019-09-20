@@ -275,10 +275,10 @@
             let combinations = getEveryLetterCombination(letters);
             console.log(JSON.stringify(combinations));
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "api.php",
-                dataType: 'json',
-                data: JSON.stringify(combinations),
+                // dataType: 'json',
+                // data: JSON.stringify(combinations),
                 success: data => {
                     // while(data[0].words.split("@@")[0].length < 8){
                     //     getDataFromServer();
