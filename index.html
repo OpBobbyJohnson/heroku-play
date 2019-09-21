@@ -241,6 +241,8 @@
             for (let child of document.getElementsByClassName("splitContainer")) {
                 child.innerHTML = "";
             }
+            document.getElementById("letterDiv").innerHTML = "";
+            document.getElementById("currentWordContainer").innerHTML = "";
             getDataFromServer();
         }
 
