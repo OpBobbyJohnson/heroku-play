@@ -83,25 +83,29 @@
             flex-direction: row;
 
         }
-        #scoreCounter {
-            top:0;
-            right:0;
-            position:absolute;
+        .scoreCounter {
             font-size: 5vh;
         }
         #buttonDiv {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
         }
         button {
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top:1%;
+            margin-bottom: 1%;
+        }
+        .bottomContainer {
+            display:flex;
+            flex-direction: row;
             margin:auto;
         }
     </style>
 </head>
 
 <body onkeydown='handleKeyPress(event)'>
-    <div id='scoreCounter'>
-    </div>
+    
     <div class="container title">
         <h1>
             Just another word game!
@@ -129,14 +133,22 @@
     </div>
     <div id='currentWordContainer' class='container currentWord'>
     </div>
-    <div id=buttonDiv class="container">
-        <button onclick="getNewWords()" class="btn btn-dark">
-            Get New Words
-        </button>
-        <button onclick="location.reload()" class="btn btn-dark">
-            Reset
-        </button>
+    <div class="container bottomContainer">
+        <div class="col-6" id=buttonDiv>
+            <button onclick="getNewWords()" class="btn btn-dark">
+                Get New Words
+            </button>
+            <button onclick="location.reload()" class="btn btn-dark">
+                Reset
+            </button>
+        </div>
+        <div class="col-6 scoreCounter">
+            Score:
+            <div id='scoreCounter'>
+            </div>
+        </div>
     </div>
+    
 
     <script>
         var letters = "";
