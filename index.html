@@ -130,7 +130,7 @@
     <div id='currentWordContainer' class='container currentWord'>
     </div>
     <div id=buttonDiv class="container">
-        <button onclick="getDataFromServer()" class="btn btn-dark">
+        <button onclick="getNewWords()" class="btn btn-dark">
             Get New Words
         </button>
         <button onclick="location.reload()" class="btn btn-dark">
@@ -142,7 +142,6 @@
         var letters = "";
         var score = 0;
         var scoreValues = {};
-        var word = 'genius';
         var indexcount = 0;
         const initializeCurrentWordContainer = (letters) => {
             let container = document.querySelector('#currentWordContainer');
@@ -235,31 +234,15 @@
             }
         }
 
-        // const getEveryLetterCombination = (letters) => {
-        //     var result = [];
-
-        //     var loop = function (start, depth, prefix) {
-        //         for (var i = start; i < letters.length; i++) {
-        //             var next = prefix + letters[i];
-        //             if (depth > 0)
-        //                 loop(i + 1, depth - 1, next);
-        //             else
-        //                 result.push(next);
-        //         }
-        //     }
-
-        //     for (var i = 0; i < letters.length; i++) {
-        //         loop(0, i, '');
-        //     }
-        //     console.log(result.length);
-        //     // fillter results
-        //     for (let i = 0; i < result.length; i++) {
-        //         if (result[i].length === 1) {
-        //             result.splice(i, 1);
-        //         }
-        //     }
-        //     return result;
-        // }
+        const getNewWords = () => {
+            letters = "";
+            scoreValues = {};
+            indexcount = 0;
+            for (let child of document.getElementsByClassName("splitContainer")) {
+                child.innerHTML = "";
+            }
+            getDataFromServer();
+        }
 
         const getDataFromServer = () => {
             $.ajax({
