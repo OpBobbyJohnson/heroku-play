@@ -89,6 +89,13 @@
             position:absolute;
             font-size: 5vh;
         }
+        #buttonDiv {
+            display: flex;
+            flex-direction: row;
+        }
+        button {
+            margin:auto;
+        }
     </style>
 </head>
 
@@ -121,6 +128,14 @@
     <div id='letterDiv' class='container letterDiv'>
     </div>
     <div id='currentWordContainer' class='container currentWord'>
+    </div>
+    <div id=buttonDiv class="container">
+        <button onclick="getDataFromServer()" class="btn btn-dark">
+            Get New Words
+        </button>
+        <button onclick="location.reload()" class="btn btn-dark">
+            Reset
+        </button>
     </div>
 
     <script>
